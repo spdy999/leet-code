@@ -1,4 +1,4 @@
-const {adjacencyList} = require("../../../data-structure/graph");
+const {adjacencyList} = require("../../../data-structure/graph/example");
 /**
  *
  * @param {string} start
