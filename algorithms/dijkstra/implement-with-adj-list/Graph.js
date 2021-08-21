@@ -56,7 +56,7 @@ class Graph {
 			parents[this.vertices[i]] = null
 		}
 
-
+		// Select best vertex by applying greedy method
 		let currVertex = this.vertexWithMinDistance(distances, visited)
 
 		while (currVertex !== null) {
@@ -73,6 +73,7 @@ class Graph {
 			}
 
 			visited.add(currVertex)
+			// Select best vertex by applying greedy method
 			currVertex = this.vertexWithMinDistance(distances, visited)
 		}
 		console.log(parents)
