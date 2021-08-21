@@ -26,23 +26,28 @@ const selectMinVertex = (processedVertices, vertexValues) => {
  * @param {number} processedVertex
  * @param {number} minVertexValue
  * @param {number} sumEdges
- * @param {number} endVertexValue
+ * @param {number} destVertexValue
  * @return {boolean}
  */
 const canRelax = (startVertexValue,
                   processedVertex,
                   minVertexValue,
                   sumEdges,
-                  endVertexValue) => startVertexValue !== 0 && processedVertex === false && minVertexValue !== Number.MAX_VALUE && sumEdges < endVertexValue;
-const dijkstra = (graph) => {
+                  destVertexValue) => startVertexValue !== 0 && processedVertex === false && minVertexValue !== Number.MAX_VALUE && sumEdges < destVertexValue;
+/**
+ *
+ * @param {number[][]} graph
+ * @param {number} start
+ */
+const dijkstra = (graph, start) => {
 	const nodeSize = graph[0].length;
-	const parent = Array(nodeSize); // Stores shortest path structure
+	const parent = Array(nodeSize).fill(-1); // Stores shortest path structure
 	const vertexValues = Array(nodeSize).fill(Number.MAX_VALUE); // Keeps shortest path values to each vertex from source
 	const processedVertices = Array(nodeSize).fill(false); // TRUE -> Vertex is processed
 
 	// Assume start point as Node-0
-	parent[0] = -1; // Start node has no parent
-	vertexValues[0] = 0; // Start node has value = 0 to get picked 1st
+	parent[start] = -1; // Start node has no parent
+	vertexValues[start] = 0; // Start node has value = 0 to get picked 1st
 
 	// Include (V-1) edges to cover all V-vertices
 	for (let i = 0; i < nodeSize; i++) {
@@ -66,16 +71,30 @@ const dijkstra = (graph) => {
 					vertexValues[minVertexIndex],
 					sumEdges,
 					vertexValues[j])) {
+
 				vertexValues[j] = sumEdges;
 				parent[j] = minVertexIndex;
+
 			}
 		}
 	}
 
-	// Print shortest path graph
-	for (let j = 1; j < nodeSize; ++j) {
-		console.log(`U->V: ${parent[j]} -> ${j} wt = ${graph[parent[j]][j]}`);
-	}
+	vertexValues.splice(start, 1)
+	return vertexValues
+	// return vertexValues
+	// const shortestPathEachNode = []
+	// // Print shortest path graph
+	// for (let j = 0; j < nodeSize; ++j) {
+	// 	if (j === start) continue
+	// 	if (parent[j] === -1) {
+	// 		shortestPathEachNode.push(-1)
+	// 	} else {
+	//
+	// 		console.log(`U->V: ${parent[j]} -> ${j} wt = ${graph[parent[j]][j]}`);
+	// 		shortestPathEachNode.push(graph[parent[j]][j])
+	// 	}
+	// }
+	// return shortestPathEachNode
 };
 
 module.exports = {
