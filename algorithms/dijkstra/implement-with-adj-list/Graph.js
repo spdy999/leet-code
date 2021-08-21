@@ -6,7 +6,7 @@ class Graph {
 
 	/**
 	 *
-	 * @param {string} vertex
+	 * @param {string | number} vertex
 	 */
 	addVertex(vertex) {
 		this.vertices.push(vertex)
@@ -39,15 +39,14 @@ class Graph {
 	/**
 	 *
 	 * @param {string} source
+	 * @return {Object}
 	 */
 	dijkstra(source) {
-		// const distances = new Map()
-		// const parents = new Map()
-
 		const distances = {}
 		const parents = {}
 		const visited = new Set()
 
+		// initial distances and parents
 		for (let i = 0; i < this.vertices.length; i++) {
 			if (this.vertices[i] === source) {
 				distances[source] = 0
@@ -78,6 +77,7 @@ class Graph {
 		}
 		console.log(parents)
 		console.log(distances)
+		return distances
 	}
 
 	/**
