@@ -38,14 +38,14 @@ describe('dijkstra', () => {
 		[0, 0, 0, 6, 7, 0]];
 
 	test('case 1', () => {
-		expect(dijkstra(graph, 0)).toEqual([1, 4, 3, 7, 9]);
+		expect(dijkstra(graph, 0)).toEqual([0, 1, 4, 3, 7, 9]);
 	})
 
 	test('case 2', () => {
-		expect(dijkstra(graph, 1)).toEqual([1, 4, 2, 6, 8]);
+		expect(dijkstra(graph, 1)).toEqual([1, 0, 4, 2, 6, 8]);
 	})
 
 	test('case 3', () => {
-		expect(dijkstra(graph, 3)).toEqual([3, 2, 3, 4, 6]);
+		expect(dijkstra(graph, 3)).toEqual([3, 2, 3, 0, 4, 6]);
 	})
 });

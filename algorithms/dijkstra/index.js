@@ -79,7 +79,6 @@ const dijkstra = (graph, start) => {
 		}
 	}
 
-	vertexValues.splice(start, 1)
 	return vertexValues
 	// return vertexValues
 	// const shortestPathEachNode = []
