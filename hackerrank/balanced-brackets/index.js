@@ -1,3 +1,4 @@
+// ref: https://www.youtube.com/watch?v=9kmUaXrjizQ&ab_channel=TECHDOSE
 /*
  * Complete the 'isBalanced' function below.
  *
@@ -8,29 +9,25 @@
 function isBalanced(s) {
 	// Write your code here
 	const sLength = s.length
-	const halfLength = sLength / 2
-	let firstHalfInd = halfLength - 1
-	let secondHalfInd = halfLength
+	if (sLength % 2 !== 0) return 'NO'
+	const openBrackets = new Set(['{', '[', '('])
+	const stack = []
 	const table = {
-		'{': '}',
 		'}': '{',
-		'(': ')',
 		')': '(',
-		'[': ']',
 		']': '['
 	}
-	const leftSet = new Set('{([')
-	const rightSet = new Set('})]')
 
-	while (firstHalfInd !== 0 && secondHalfInd < sLength) {
-		const left = s[firstHalfInd--]
-		const trueRight = s[secondHalfInd++]
-		const right = table[trueRight]
-		if (!leftSet.has(left) || !rightSet.has(trueRight) || left !== right) {
+	for (let i = 0; i < sLength; i++) {
+		if (openBrackets.has(s[i])) stack.unshift(s[i])
+		else {
+			const openBracket = stack.shift()
+			const closeBracket = s[i]
+			if (openBracket === table[closeBracket]) continue
 			return 'NO'
 		}
 	}
-	return 'YES'
+	return stack.length === 0 ? 'YES' : 'NO'
 }
 
 module.exports = {isBalanced}
