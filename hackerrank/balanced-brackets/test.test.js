@@ -14,3 +14,7 @@ test('case 3', () => {
 test('case 4', () => {
 	expect(isBalanced('{{)[](}}')).toEqual('NO')
 })
+
+test('case 5', () => {
+	expect(isBalanced('{{[(')).toEqual('NO')
+})
